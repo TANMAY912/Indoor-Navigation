@@ -73,6 +73,7 @@
             }
           }
         }
+        var shortest_path_var = [];
         function shortest_path(){
            var pred = [];
            var dist = [];
@@ -95,6 +96,7 @@
             if(ai == 1000)
               return;
            }
+           shortest_path_var = path;
            for(var b=0;b<(path.length)-1;b++){
             console.log(path[b]);   //only for debugging
             make_path(path[b],path[b+1]);
@@ -217,6 +219,34 @@
          red(src);
          blue(dest);
 	      }
+
+        var temp_bool = false
+        var initial;
+        function Next() {
+          if(temp_bool==false){
+            initial = 0
+           }
+          for (var c = 0; c < obj.cords.length; c++) {
+            if(shortest_path_var[initial]==obj.cords[c].value){
+                 if(initial!=shortest_path_var.length)
+                      document.getElementById("display_next").innerHTML="From "+obj.cords[c].name+" go to "+obj.cords[c+1].name;
+            }
+          }
+          initial++;
+        }
+        function Previous() {
+          if(temp_bool==false){
+            return;
+           }
+          for (var c = 0; c < obj.cords.length; c++) {
+            if(shortest_path_var[initial]==obj.cords[c].value){
+                 if(initial!=shortest_path_var.length)
+                      document.getElementById("display_prev").innerHTML="From "+obj.cords[c].name+" go to "+obj.cords[c-1].name;
+            }
+          }
+          initial--;
+        }
+
       </script>
    </head>
    <body>
@@ -260,6 +290,10 @@
 
 	<button id = "submit" type = "button" onclick = "Submit()">Submit</button><br>
   <p id="display_name"></p>
+  <button id="next" type = "button" onclick="Next()">Next</button><br>
+  <p id="display_next"></p>
+  <button id="previous" type = "button" onclick="Previous()">Previous</button><br>
+  <p id="display_prev"></p>
   <p>Description:</p>
   <p id="discription"></p>
   </script>

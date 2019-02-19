@@ -291,14 +291,28 @@ function reset(){
     }
   }
 }
+
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 function Submit(){
 
   Create_JSON();
   document.getElementById('json').innerHTML = finalJSON;
-  Print();
+  if(!IsJsonString(finalJSON)){
+    alert("An unknown error has occured! Please refresh the page and try again");
+    return;
+  }
+//  Print();
 
   var name = name_temp.replace('.jpg','');
-  alert("name : " + finalJSON);
+//  alert("name : " + finalJSON);
   document.getElementById('name').innerHTML = name;
   if(name == ""){
     alert("Please enter a tag");
@@ -307,7 +321,7 @@ function Submit(){
     //alert("q");
     //alert($("#name").html());
     //alert("w");
-    alert($("#json").html());
+//    alert($("#json").html());
     send();
     alert("done");
   }

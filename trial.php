@@ -319,9 +319,9 @@ function Submit(){
     return;
   }else{
     //alert("q");
-    //alert($("#name").html());
+    alert($("#name").html());
     //alert("w");
-//    alert($("#json").html());
+    alert($("#json").html());
     send();
     alert("done");
   }
